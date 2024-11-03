@@ -27,6 +27,7 @@
     "@graphql-codegen/client-preset": "^4.5.0",
     "@graphql-codegen/schema-ast": "^4.1.0",
     "@graphql-typed-document-node/core": "3.2.0",
+    "@octokit/rest": "21.0.2",
     "@parcel/watcher": "^2.4.1",
     "@types/node": "22.8.6",
     "npm-run-all2": "7.0.1",

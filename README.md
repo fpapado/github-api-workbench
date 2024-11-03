@@ -1,6 +1,10 @@
 # GitHub API workbench
 
+> A little workbench to explore GitHub's REST and GraphQL APIs. Split off from some of my own explorations; you might find this useful too :)
+
 ## Step 1: Use with the GitHub CLI (`gh`)
+
+This is the simplest way to explore the GitHub API, because it manages authentication for you, and you do not need to dive into scripts. I find it most useful for "gut feeling" checks.
 
 First, [install the GitHub CLI](https://cli.github.com/)
 
@@ -13,12 +17,18 @@ gh auth login
 You are ready to make requests:
 
 ```shell
+# REST example
+gh api repos/octokit/graphql.js
+
+# GraphQL example
 gh api graphql -F query=@src/demo.graphql -f owner="octokit" -f repo="graphql.js"
 ```
 
-You can point the query flag to other graphql files, and change the parameters as you wish. However, this will mean some back and forth between [the GitHub GraphQL docs](https://docs.github.com/en/graphql/overview/public-schema) and your editor, so you might want to set up a richer IDE support.
+REST is simple enough, and you can keep iterating in the console.
 
-## Step 2: IDE Setup
+For GraphQL, you can point the query flag to other query documents, and change the parameters as you wish. However, this will mean some back and forth between [the GitHub GraphQL docs](https://docs.github.com/en/graphql/overview/public-schema) and your editor, so you might want to set up a richer IDE support.
+
+## Step 2: IDE Setup for GraphQL
 
 If you are using VSCode, it should prompt you to install the GraphQL syntax support and language server extensions. Otherwise, install the GraphQL extensions that seem appropriate for your editor.
 
@@ -28,7 +38,7 @@ Open `src/demo.graphql` and you should now have a full IDE experience. You can e
 
 ## Step 3: Local TypeScript Setup
 
-To use the TypeScript scripts, you will need Node 22 and pnpm. I recommend [nvm for managing your node distribution](https://github.com/nvm-sh/nvm).
+To use the TypeScript setup, you will need Node 22 and pnpm. I recommend [nvm for managing your node distribution](https://github.com/nvm-sh/nvm).
 
 In a shell, run:
 
@@ -68,9 +78,11 @@ There are methods for keeping keys secure, without storing them in a file or lug
 
 ### Run the workbench script
 
-The scripts under `src/workbench.ts` contain some scaffolding for making type-safe API requests. This works hand-in-hand with the `graphql-codegen` script.
+The scripts under `src/workbench.ts` contain some scaffolding for making type-safe API requests, both with the REST and GraphQL APIs. The latter works hand-in-hand with the `graphql-codegen` script.
 
-While editing files actively, you will probably want to keep graphql-codegen running in watch mode, so that you get the correct parameter and return types for your queries:
+While editing files and GraphQL queries actively, you will probably want to keep
+graphql-codegen running in watch mode, so that you get the correct parameter and
+return types for those queries:
 
 ```shell
 pnpm codegen:watch

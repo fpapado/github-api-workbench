@@ -24,10 +24,10 @@
     "allowImportingTsExtensions": true,
 
     // Fresh in TypeScript 5.7, this will rewrite .ts extensions to .js in build
-    // mode, to avoid importing non-existent files. We are not emitting though.
-    // @see
+    // mode, to avoid importing non-existent files. We are not emitting though,
+    // so this is left just for posterity. @see
     // https://devblogs.microsoft.com/typescript/announcing-typescript-5-7-beta/#path-rewriting-for-relative-paths
-    "rewriteRelativeImportExtensions": true,
+    // "rewriteRelativeImportExtensions": true,
 
     // we don't use tsc for emitting, just type-checking
     "noEmit": true,

@@ -1,0 +1,43 @@
+{
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    // Modern node resolution
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    // These options are set for compatibility with node's
+    // --experimental-strip-types and --experimental-transform-types. The only
+    // blocker for the latter is that graphql-codegen's preset-client `gql.ts`
+    // imports files as `.js`. Node's --experimental-strip-types requires `.ts`,
+    // because they do not change the on-disk emit. There is no way to configure
+    // graphql-codegen in a non-hacky way, so we should open an issue for it.
+
+    // enforce isolated modules and match the module syntax in TS files 1-to-1
+    // with what is emitted. For example, if you author ESM, then ESM is output.
+    // This allows modeling the type-stripping behavior. @see
+    // https://nodejs.org/docs/latest-v22.x/api/typescript.html#typescript-features:~:text=Due%20to%20the%20nature%20of%20type%20stripping%2C%20the%20type%20keyword%20is%20necessary%20to%20correctly%20strip%20type%20imports.%20Without%20the%20type%20keyword%2C%20Node.js%20will%20treat%20the%20import%20as%20a%20value%20import%2C%20which%20will%20result%20in%20a%20runtime%20error.%20The%20tsconfig%20option%20verbatimModuleSyntax%20can%20be%20used%20to%20match%20this%20behavior.
+    "verbatimModuleSyntax": true,
+
+    // node with --experimental-strip-types uses .ts extensions (presumably
+    // because it does not change the emit at all, so the on-disk files stay as
+    // .ts), so we configure tsc as such. @see
+    // https://nodejs.org/docs/latest-v22.x/api/typescript.html#typescript-features:~:text=The%20tsconfig.json%20option%20allowImportingTsExtensions%20will%20allow%20the%20TypeScript%20compiler%20tsc%20to%20type%2Dcheck%20files%20with%20import%20specifiers%20that%20include%20the%20.ts%20extension.
+    "allowImportingTsExtensions": true,
+
+    // Fresh in TypeScript 5.7, this will rewrite .ts extensions to .js in build
+    // mode, to avoid importing non-existent files. We are not emitting though.
+    // @see
+    // https://devblogs.microsoft.com/typescript/announcing-typescript-5-7-beta/#path-rewriting-for-relative-paths
+    "rewriteRelativeImportExtensions": true,
+
+    // we don't use tsc for emitting, just type-checking
+    "noEmit": true,
+
+    // LSP plugin to get intellisense for graphql in string literals
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./schema.graphql"
+      }
+    ]
+  }
+}

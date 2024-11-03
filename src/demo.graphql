@@ -1,0 +1,6 @@
+query demo($owner: String!, $repo: String!) {
+  repository(owner: $owner, name: $repo) {
+    name
+    stargazerCount
+  }
+}

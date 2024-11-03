@@ -1,0 +1,36 @@
+{
+  "name": "github-graphql-workbench",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "npm-run-all -s codegen workbench",
+    "workbench": "node --env-file=.env --experimental-strip-types --experimental-transform-types src/workbench.ts",
+    "workbench:watch": "node --env-file=.env --experimental-strip-types --experimental-transform-types --watch-path=./src/workbench.ts --watch-preserve-output src/workbench.ts",
+    "codegen": "graphql-codegen",
+    "codegen:watch": "graphql-codegen --watch"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Fotis Papadogeorgopoulos",
+    "email": "fotis@fpapado.com",
+    "url": "https://fotis.xyz"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/graphql": "8.1.1"
+  },
+  "packageManager": "pnpm@9.12.3+sha256.24235772cc4ac82a62627cd47f834c72667a2ce87799a846ec4e8e555e2d4b8b",
+  "devDependencies": {
+    "@0no-co/graphqlsp": "^1.12.16",
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/client-preset": "^4.5.0",
+    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-typed-document-node/core": "3.2.0",
+    "@parcel/watcher": "^2.4.1",
+    "@types/node": "22.8.6",
+    "npm-run-all2": "7.0.1",
+    "prettier": "3.3.3",
+    "typescript": "5.7.0-beta"
+  }
+}

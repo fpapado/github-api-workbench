@@ -1,0 +1,5 @@
+node_modules
+.env
+
+# either codegened, or to be supplied by the user
+schema.docs.graphql
